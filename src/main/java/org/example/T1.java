@@ -5,14 +5,12 @@ import java.util.concurrent.Executors;
 
 public class T1 extends Thread {
     int x;
-
     public T1(int x) {
         this.x = x;
     }
-
     @Override
     public void run() {
-        while (true){
+        while (true) {
             synchronized (App.locker) {
                 App.locker.notify();
                 App.x++;
@@ -28,14 +26,12 @@ public class T1 extends Thread {
 
 class T2 extends Thread {
     int x;
-
     public T2(int x) {
         this.x = x;
     }
-
     @Override
     public synchronized void start() {
-        while (true){
+        while (true) {
             synchronized (App.locker) {
                 try {
                     App.locker.wait();
